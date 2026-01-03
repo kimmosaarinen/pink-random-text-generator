@@ -10,13 +10,20 @@
     <div class="container w-md p-4">
       <div class="flex flex-col gap-2 items-end">
         <div class="flex flex-row gap-2 items-center">
+          Language
+          <input id="language-en" type="radio" name="language" value="en" />
+          <label for="language-en">English</label>
+          <input id="language-fi" type="radio" name="language" value="fi" />
+          <label for="language-fi">Finnish</label>
+        </div>
+        <div class="flex flex-row gap-2 items-center">
           Minimum
-          <input id="w1" type="radio" name="words" value="100" />
-          <label for="w1">100</label>
-          <input id="w2" type="radio" name="words" value="200" />
-          <label for="w2">200</label>
-          <input id="w3" type="radio" name="words" value="500" />
-          <label for="w3">500 characters</label>
+          <input id="words-a" type="radio" name="words" value="100" />
+          <label for="words-a">100</label>
+          <input id="words-b" type="radio" name="words" value="200" />
+          <label for="words-b">200</label>
+          <input id="words-c" type="radio" name="words" value="500" />
+          <label for="words-c">500 characters</label>
         </div>
         <div class="flex flex-row gap-2 items-center">
           <input type="checkbox" id="autocopy" />

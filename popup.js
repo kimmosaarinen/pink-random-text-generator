@@ -1,6 +1,9 @@
-const generateNewText = () => {
-  fetch("data/english.txt")
-    .then((res) => res.text())
+const generateNewText = (language) => {
+  fetch(`data/${language}.txt`)
+    .then(async (res) => {
+      const text = await res.text();
+      return text.replace(/\s+/g, " ");
+    })
     .then(async (source) => {
       var material =
         generate({
@@ -30,8 +33,9 @@ const generateNewText = () => {
       document.getElementById("output").innerText = output;
       const autoCopy = document.getElementById("autocopy").checked;
       if (autoCopy) {
+        document.getElementById("output").focus();
         setTimeout(async () => {
-          // getting sometimes "document not focused" error, so let's do a small wait before copyint to clipboard
+          // getting sometimes "document not focused" error, so let's do a small wait before copying to clipboard
           await navigator.clipboard.writeText(output);
         }, 100);
       }
@@ -47,39 +51,54 @@ function printDebug(s) {
 }
 
 document.addEventListener("DOMContentLoaded", async (event) => {
-  const data = await chrome.storage.local.get(["autocopy", "words"]);
-  if (data) {
-    const autocopy = data.autocopy ?? false;
-    const words = data.words ?? 200;
+  const data = await chrome.storage.local.get(["autocopy", "words", "language"]) ?? {};
+  const autocopy = data.autocopy ?? false;
+  const words = data.words ?? 200;
+  let language = data.language ?? "en";
 
-    document.getElementById("autocopy").checked = autocopy;
-    const radioToCheck = document.querySelector(`input[name="words"][value="${words}"]`);
-    if (radioToCheck) radioToCheck.checked = true;
-  }
+  document.getElementById("autocopy").checked = autocopy;
+
+  const wordsToCheck = document.querySelector(`input[name="words"][value="${words}"]`);
+  if (wordsToCheck) wordsToCheck.checked = true;
+
+  const langToCheck = document.querySelector(`input[name="language"][value="${language}"]`);
+  if (langToCheck) langToCheck.checked = true;
+
+  document.getElementById("language-en").addEventListener("click", async () => {
+    language = "en";
+    await chrome.storage.local.set({ language });
+    generateNewText(language);
+  });
+
+  document.getElementById("language-fi").addEventListener("click", async () => {
+    language = "fi";
+    await chrome.storage.local.set({ language });
+    generateNewText(language);
+  });
 
   document.getElementById("autocopy").addEventListener("click", async () => {
     const autocopy = document.getElementById("autocopy").checked;
     await chrome.storage.local.set({ autocopy });
   });
 
-  document.getElementById("w1").addEventListener("click", async () => {
+  document.getElementById("words-a").addEventListener("click", async () => {
     await chrome.storage.local.set({ words: 100 });
-    generateNewText();
+    generateNewText(language);
   });
 
-  document.getElementById("w2").addEventListener("click", async () => {
+  document.getElementById("words-b").addEventListener("click", async () => {
     await chrome.storage.local.set({ words: 200 });
-    generateNewText();
+    generateNewText(language);
   });
 
-  document.getElementById("w3").addEventListener("click", async () => {
+  document.getElementById("words-c").addEventListener("click", async () => {
     await chrome.storage.local.set({ words: 500 });
-    generateNewText();
+    generateNewText(language);
   });
 
   document.getElementById("btn").addEventListener("click", () => {
-    generateNewText();
+    generateNewText(language);
   });
-  generateNewText();
+  generateNewText(language);
 });
 
