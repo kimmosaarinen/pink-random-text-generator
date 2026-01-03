@@ -33,18 +33,22 @@ const generateNewText = (language) => {
       document.getElementById("output").innerText = output;
       const autoCopy = document.getElementById("autocopy").checked;
       if (autoCopy) {
-        document.getElementById("output").focus();
-        setTimeout(async () => {
-          // getting sometimes "document not focused" error, so let's do a small wait before copying to clipboard
-          await navigator.clipboard.writeText(output);
-        }, 100);
+        copyToClipboard(output);
       }
     })
     .catch((e) => {
       console.error(e);
-      document.getElementById("output").value = e.message || e.toString();
+      document.getElementById("output").innerText = e.message || e.toString();
     });
 };
+
+function copyToClipboard(text) {
+  document.getElementById("output").focus();
+  setTimeout(async () => {
+    // getting sometimes "document not focused" error, so let's do a small wait before copying to clipboard
+    await navigator.clipboard.writeText(text);
+  }, 100);
+}
 
 function printDebug(s) {
   document.getElementById("dummy").value += "\n" + s;
@@ -94,6 +98,11 @@ document.addEventListener("DOMContentLoaded", async (event) => {
   document.getElementById("words-c").addEventListener("click", async () => {
     await chrome.storage.local.set({ words: 500 });
     generateNewText(language);
+  });
+
+  document.getElementById("output").addEventListener("click", () => {
+    const text = document.getElementById("output").innerText;
+    copyToClipboard(text);
   });
 
   document.getElementById("btn").addEventListener("click", () => {
