@@ -1,5 +1,5 @@
 const generateNewText = () => {
-  fetch("english.txt")
+  fetch("data/english.txt")
     .then((res) => res.text())
     .then(async (source) => {
       var material =
