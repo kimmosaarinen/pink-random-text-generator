@@ -1,0 +1,19 @@
+{
+  "manifest_version": 3,
+  "name": "Pink Random Text Generator",
+  "version": "1.0.0",
+  "description": "Random english text generator with autocopy to clipboard and customizable length.",
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "storage"
+  ],
+  "icons": {
+    "16": "icons/16.png",
+    "32": "icons/32.png",
+    "192": "icons/192.png",
+    "512": "icons/512.png"
+  },
+  "minimum_chrome_version": "132"
+}

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="tailwind.js"></script>
+    <script src="generator/tokenizer.js"></script>
+    <script src="generator/generator.js"></script>
+    <script src="popup.js"></script>
+  </head>
+  <body class="bg-[#001122] text-[#fff] font-thin">
+    <div class="container w-md p-4">
+      <div class="flex flex-col gap-2 items-end">
+        <div class="flex flex-row gap-2 items-center">
+          Minimum
+          <input id="w1" type="radio" name="words" value="100" />
+          <label for="w1">100</label>
+          <input id="w2" type="radio" name="words" value="200" />
+          <label for="w2">200</label>
+          <input id="w3" type="radio" name="words" value="500" />
+          <label for="w3">500 characters</label>
+        </div>
+        <div class="flex flex-row gap-2 items-center">
+          <input type="checkbox" id="autocopy" />
+          <label for="autocopy"
+            >Automatically copy the generated text into clipboard</label
+          >
+        </div>
+        <button
+          id="btn"
+          class="bg-[#f3a] text-white w-full py-2 px-4 mt-2 text-base font-medium cursor-pointer"
+        >
+          Regenerate
+        </button>
+      </div>
+      <div
+        id="output"
+        class="w-full b-0 mt-4 overflow-hidden text-ellipsis text-base"
+      />
+    </div>
+  </body>
+</html>
