@@ -62,7 +62,8 @@ chrome-extension/
 ├── manifest.json         # Extension configuration
 ├── popup.html            # Extension popup UI
 ├── popup.js              # Main application logic
-├── english.txt           # Source text corpus
+├── data/                 # Source text corpus
+│   └── english.txt       # English source
 ├── tailwind.js           # Tailwind CSS
 ├── generator/
 │   ├── generator.js      # Markov chain text generator
