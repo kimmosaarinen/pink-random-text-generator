@@ -1,6 +1,6 @@
 {
   "name": "pink-random-text-generator",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "main": "popup.js",
   "scripts": {
     "zip": "zip pink-random-text-generator.zip -r manifest.json popup.html popup.js tailwind.js icons/*png generator/ data/*.txt"

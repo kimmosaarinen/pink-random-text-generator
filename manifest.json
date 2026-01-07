@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "Pink Random Text Generator",
-  "version": "1.0.0",
-  "description": "Random english text generator with autocopy to clipboard and customizable length.",
+  "version": "1.1.0",
+  "description": "Random multi-lingual (English, Finnish) text generator with autocopy to clipboard and customizable length.",
   "action": {
     "default_popup": "popup.html"
   },
