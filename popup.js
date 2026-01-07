@@ -56,7 +56,7 @@ function printDebug(s) {
 
 document.addEventListener("DOMContentLoaded", async (event) => {
   const data = await chrome.storage.local.get(["autocopy", "words", "language"]) ?? {};
-  const autocopy = data.autocopy ?? false;
+  const autocopy = data.autocopy ?? true;
   const words = data.words ?? 200;
   let language = data.language ?? "en";
 
